@@ -197,9 +197,9 @@
 	<%if(Notes.size()>0){ %>
 	<%for(Notes note:Notes){ %>
 		<div class="note">
-			<h3><%=note.getTitle() %></h3>
-			<p><%= note.getContent() %></p>
-			<button onClick="update('<%= note.getNoteID() %>','<%=note.getTitle() %>',`<%= note.getContent() %>`)" class="Editbtn"><i class="fa-solid fa-pencil"></i></button>
+			<h3 class="title-<%= note.getNoteID() %>"><%=note.getTitle() %></h3>
+			<p class="content-<%= note.getNoteID() %>"><%= note.getContent() %></p>
+			<button onClick="update('<%= note.getNoteID() %>')" class="Editbtn"><i class="fa-solid fa-pencil"></i></button>
 			<button onClick="deleteNote('<%= note.getNoteID() %>')" form="delete" class="Delbtn"><i class="fa-solid fa-trash"></i></button>
 		</div>
 	<%} }else{%>
@@ -222,10 +222,10 @@
 	
 	document.querySelector('.notes').scrollTop=document.querySelector('.notes').scrollHeight
 	
-	function update(noteid,title,content){
+	function update(noteid){
 		document.querySelector('.noteid').value=noteid
-		document.querySelector('.title').value=title
-		document.querySelector('.content').value=content
+		document.querySelector('.title').value=document.querySelector('.title-'+noteid).innerText
+		document.querySelector('.content').value=document.querySelector('.content-'+noteid).innerText
 		document.querySelector('.add').classList.add('hidden')
 		document.querySelector('.update').classList.remove('hidden')
 	}
